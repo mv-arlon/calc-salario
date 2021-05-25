@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+  <head>
+    <title>ABC Corp</title>
+  </head>
+  <style>
+	#alerta {
+	  color: red;
+	  font-size: large;
+	  font-weight: bolder;
+	  margin-top: 20px;
+	}
+
+	.blink {
+	  animation: blinker 0.6s linear infinite;
+	  color: #1c87c9;
+	  font-size: 30px;
+	  font-weight: bold;
+	  font-family: sans-serif;
+	}
+
+	@keyframes blinker {
+	  100% {
+		opacity: 0;
+	  }
+	}
+
+  </style>
+
+  <body>
+
+    <h2>ABC Calculo do aumento</h2>
+
+    <form id="formCalc" method="POST">
+      <label for="fsalario">Salário Atual:</label><br>
+      <input type="text" id="fsalario" name="fnfsalarioame" value="1100" placeholder="Digite o salário"><br /><br />
+      <button type="submit">Calcular</button>
+      <br /><br />
+    </form>
+    <div id="result">
+      Resultado
+    </div>
+    <div id="alerta" class="blink" style="display:none;">
+      Alerta de escravidão!!!. Procure seus direitos!!!!
+    </div>
+
+  </body>
+
+</html>
+
+</html>
+
+<script>
+	document.getElementById("formCalc").addEventListener("submit", Calc);
+
+	function Calc() {
+	  event.preventDefault();
+	  var formatter = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'BRL',
+	  });
+
+	  var fSal = document.getElementById("fsalario").value;
+	  var NovoSal = fSal;
+	  var diff = 0;
+
+	  if (fSal <= 400.00) {
+		NovoSal = fSal * 1.15;
+		diff = NovoSal - fSal;
+		sRes = 'Novo salário: ' + formatter.format(NovoSal) + '<br />' +
+		  'Aumento: ' + formatter.format(diff) + '<br />' + ' Ganho de 15%';
+	  } else if (fSal <= 800.00) {
+		NovoSal = fSal * 1.12;
+		diff = NovoSal - fSal;
+		sRes = 'Novo salário: ' + formatter.format(NovoSal) + '<br />' +
+		  'Aumento: ' + formatter.format(diff) + '<br />' + ' Ganho de 12%';
+	  } else if (fSal <= 1200.00) {
+		NovoSal = fSal * 1.10;
+		diff = NovoSal - fSal;
+		sRes = 'Novo salário: ' + formatter.format(NovoSal) + '<br />' +
+		  'Aumento: ' + formatter.format(diff) + '<br />' + ' Ganho de 10%';
+	  } else if (fSal <= 2000.00) {
+		NovoSal = fSal * 1.07;
+		diff = NovoSal - fSal;
+		sRes = 'Novo salário: ' + formatter.format(NovoSal) + '<br />' +
+		  'Aumento: ' + formatter.format(diff) + '<br />' + ' Ganho de 7%';
+	  } else {
+		NovoSal = fSal * 1.04;
+		diff = NovoSal - fSal;
+		sRes = 'Novo salário: ' + formatter.format(NovoSal) + '<br />' +
+		  'Aumento: ' + formatter.format(diff) + '<br />' + ' Ganho de 4%';
+	  }
+	  document.getElementById("result").innerHTML = sRes;
+	  if (NovoSal < 1100) {
+		document.getElementById("alerta").style.display = 'block';
+	  } else {
+		document.getElementById("alerta").style.display = 'none';
+	  }
+	}
+</script>
